@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <h2> Select from the following lists</h2>
+<!--  <script src="manager.js" type="javascript/text"></script> -->
+  <script>
+  /* examples for generating random #'s'
+  // 0 -> 10
+Math.floor(Math.random() * 11);
+
+// 1 -> 10
+Math.floor(Math.random() * 10) + 1;
+
+// 5 -> 20
+Math.floor(Math.random() * 16) + 5;
+
+// -10 -> (-2)
+Math.floor(Math.random() * 9) - 10;
+  */
+    function display() {
+      if (ip.value == "IPv4") {
+        //show ipv4
+        document.getElementById('full4').style.display = "block";
+        document.getElementById('fullOptions4').style.display = "block";
+
+
+        document.getElementById('mask4').style.display = "block";
+        document.getElementById('maskOptions4').style.display = "block";
+        // Enter ip address
+        //  document.getElementById('userIP').style.display = 'block';
+        //  document.getElementById('questionIN').style.display = 'block';
+        // question how many ip adrress needed
+        document.getElementById('question').style.display = 'block';
+        document.getElementById('questioni').style.display = 'block';
+        document.getElementById('questionb').style.display = 'inline-block';
+        // question for new request
+        document.getElementById('refb').style.display = "inline-block";
+
+        // hide i6
+        document.getElementById('less6').style.display = "none";
+        document.getElementById('lessOptions6').style.display = "none";
+        document.getElementById('mask6').style.display = "none";
+        document.getElementById('maskOptions6').style.display = "none";
+        document.getElementById('zero6').style.display = "none";
+        document.getElementById('zeroOptions6').style.display = "none";
+      } else if (ip.value == "IPv6") {
+        // hide ipv4
+        document.getElementById('full4').style.display = "none";
+        document.getElementById('fullOptions4').style.display = "none";
+        document.getElementById('AE4').style.display = "none";
+        document.getElementById('AEOptions4').style.display = "none";
+        document.getElementById('mask4').style.display = "none";
+        document.getElementById('maskOptions4').style.display = "none";
+        // hide reserved e
+        document.getElementById('paraE').style.display = "none";
+
+
+        //show ip6
+        document.getElementById('less6').style.display = "block";
+        document.getElementById('lessOptions6').style.display = "block";
+    //    document.getElementById('mask6').style.display = "block";
+      //  document.getElementById('maskOptions6').style.display = "block";
+        document.getElementById('zero6').style.display = "block";
+        document.getElementById('zeroOptions6').style.display = "block";
+        //// question ip address
+        document.getElementById('question').style.display = 'block';
+        document.getElementById('questioni').style.display = 'block';
+        document.getElementById('questionb').style.display = 'block';
+
+        //Enter ip adrress
+        //   document.getElementById('userIP').style.display = 'block';
+        //    document.getElementById('questionIN').style.display = 'block';
+        // question ip adrress needed
+        document.getElementById('question').style.display = 'block';
+        document.getElementById('questioni').style.display = 'block';
+        document.getElementById('questionb').style.display = 'inline-block';
+        // question for new request
+        document.getElementById('refb').style.display = "inline-block";
+      }
+    }
+    // used for displaying once user chooses class e
+    function displayAE() {
+      if (ip.value == "IPv4" && AEOptions4.value == "E") {
+        document.getElementById('paraE').style.display = "block";
+      }
+    }
+
+    function chooseClass4() {
+      if (fullOptions4.value == "Classful") {
+      document.getElementById('AE4').style.display = "block";
+      document.getElementById('AEOptions4').style.display = "block";
+      document.getElementById('mask4').style.display = "none";
+      document.getElementById('maskOptions4').style.display = "none";
+    } else {
+      document.getElementById('AE4').style.display = "none";
+      document.getElementById('AEOptions4').style.display = "none";
+      document.getElementById('mask4').style.display = "block";
+      document.getElementById('maskOptions4').style.display = "block";
+      }
+    }
+
+    function chooseClass6 () {
+      if (lessOptions6.value == "Yes") {
+        document.getElementById('mask6').style.display = "block";
+        document.getElementById('maskOptions6').style.display = "block";
+      } else {
+        document.getElementById('mask6').style.display = "none";
+        document.getElementById('maskOptions6').style.display = "none";
+      }
+    }
+
+    // returns value for ip address entered by user and prints ip address based on class
+    function myFunction() {
+      var x = document.getElementById('questioni').value;
+      console.log(x);
+      if (x > 255) {
+        //display error msg
+        document.getElementById('error').style.display = "block";
+        return;
+      } else
+      // hide error msg
+      document.getElementById('error').style.display = "none";
+
+      document.getElementById('userValue').innerHTML = 'You entered: ' + x;
+      if (ip.value == "IPv4" && AEOptions4.value == "A") {
+        var text = "";
+        var count = 0;
+        var network = (Math.floor(Math.random() * 127) + 0) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+        var d = network.split('.');
+         var d0 = (+d[0]).toString(2);
+         var d1 = (+d[1]).toString(2);
+         var d2 = (+d[2]).toString(2);
+         // convert the host numbr into binary
+
+        while (count < document.getElementById('questioni').value) {
+          var host = (Math.floor(Math.random() * 254) + 1);
+          var hostB = (+host).toString(2);
+          count++;
+           text+='Generated IP: ' + " " + network + "." + host + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + hostB + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+      }
+      } else if (ip.value == "IPv4" && AEOptions4.value == "B") {
+        var text = "";
+        var count = 0;
+        var network = (Math.floor(Math.random() * 64) + 128) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+        var d = network.split('.');
+         var d0 = (+d[0]).toString(2);
+         var d1 = (+d[1]).toString(2);
+         var d2 = (+d[2]).toString(2);
+         // convert the host numbr into binary
+
+        while (count < document.getElementById('questioni').value) {
+          var host = (Math.floor(Math.random() * 254) + 1);
+          var hostB = (+host).toString(2);
+          count++;
+           text+='Generated IP: ' + " " + network + "." + host + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + hostB + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+        }
+      } else if (ip.value == "IPv4" && AEOptions4.value == "C") {
+        var text = "";
+        var count = 0;
+        var network = (Math.floor(Math.random() * 32) + 192) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+        var d = network.split('.');
+         var d0 = (+d[0]).toString(2);
+         var d1 = (+d[1]).toString(2);
+         var d2 = (+d[2]).toString(2);
+         // convert the host numbr into binary
+
+        while (count < document.getElementById('questioni').value) {
+          var host = (Math.floor(Math.random() * 254) + 1);
+          var hostB = (+host).toString(2);
+          count++;
+           text+='Generated IP: ' + " " + network + "." + host + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + hostB + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+      }
+      } else if (ip.value == "IPv4" && AEOptions4.value == "D") {
+        var text = "";
+        var count = 0;
+        var network = (Math.floor(Math.random() * 16) + 224) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+        var d = network.split('.');
+         var d0 = (+d[0]).toString(2);
+         var d1 = (+d[1]).toString(2);
+         var d2 = (+d[2]).toString(2);
+         // convert the host numbr into binary
+
+        while (count < document.getElementById('questioni').value) {
+          var host = (Math.floor(Math.random() * 254) + 1);
+          var hostB = (+host).toString(2);
+          count++;
+           text+='Generated IP: ' + " " + network + "." + host + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + hostB + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+      }
+      } else if (ip.value == "IPv4" && AEOptions4.value == "E") {
+        var text = "";
+        var count = 0;
+        var network = (Math.floor(Math.random() * 15) + 240) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+        var d = network.split('.');
+         var d0 = (+d[0]).toString(2);
+         var d1 = (+d[1]).toString(2);
+         var d2 = (+d[2]).toString(2);
+         // convert the host numbr into binary
+
+        while (count < document.getElementById('questioni').value) {
+          var host = (Math.floor(Math.random() * 254) + 1);
+          var hostB = (+host).toString(2);
+          count++;
+           text+='Generated IP: ' + " " + network + "." + host + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + hostB + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+      }
+       } else if (ip.value == "IPv6" && zeroOptions6.value == "No") {
+          var text = "";
+          var count = 0;
+          while (count < document.getElementById('questioni').value) {
+            var networkHost = (Math.floor(Math.random() * 1001) + 1000) + ":" + "0000" + ":" + "0000" + ":" +
+            "0000" + ":" + "0000" + ":" + "000" + (Math.floor(Math.random() * 99) + 0)+ ":" +
+            "0000" + ":" + "000" + (Math.floor(Math.random() * 9) + 0);
+            var d = networkHost.split(':');
+            var d0 = (+d[0]).toString(2);
+            var d1 = (+d[1]).toString(2);
+            var d2 = (+d[2]).toString(2);
+            var d3 = (+d[3]).toString(2);
+            var d4 = (+d[4]).toString(2);
+            var d5 = (+d[5]).toString(2);
+            var d6 = (+d[6]).toString(2);
+            var d7 = (+d[7]).toString(2);
+            count++;
+        //    var xa = new Array();
+        text+='Generated IP: ' + " " + networkHost + "<br />";
+        text+= 'Binary:' + " " + d0 + ":" + d1 + ":" + d2 + ":" + d3 + ":" + d4 + ":" + d5 + ":" + d6 + ":" + d7 + "<br />" + "<br />";
+            document.getElementById('e').innerHTML = text;
+          }
+        } else if (ip.value == "IPv6" && zeroOptions6.value == "Yes") {
+          var text = "";
+          var count = 0;
+          while (count < document.getElementById('questioni').value) {
+
+            var networkHost = (Math.floor(Math.random() * 1001) + 1000) + ":" + (Math.floor(Math.random() * 9) + 0) + "::" +
+            (Math.floor(Math.random() * 999) + 0) + ":" + (Math.floor(Math.random() * 99) + 0) + ":"+(Math.floor(Math.random() * 9) + 0);
+            // split the random number by either : or :: and slip d2 becasue of :: = ""
+            var d = networkHost.split(/:|::/);
+          //  console.log(d);
+            var d0 = (+d[0]).toString(2);
+            var d1 = (+d[1]).toString(2);
+            var d3 = (+d[3]).toString(2);
+            var d4 = (+d[4]).toString(2);
+            var d5 = (+d[5]).toString(2);
+            count++;
+        //    var xa = new Array();
+            text+='Generated IP: ' + " " + networkHost + "<br />";
+            text+= 'Binary:' + " " + d0 + ":" + d1 + "::"  + d3 + ":" + d4 + ":" + d5 + "<br />" + "<br />";
+            document.getElementById('e').innerHTML = text;
+          }
+        }
+         else if (ip.value == "IPv4" && fullOptions4.value == "Classless") {
+        var text = "";
+        var count = 0;
+
+        while (count < document.getElementById('questioni').value) {
+          var networkHost = (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0) + "." + (Math.floor(Math.random() * 255) + 0);
+          var d = networkHost.split('.');
+        //  console.log(d);
+          var d0 = (+d[0]).toString(2);
+          var d1 = (+d[1]).toString(2);
+          var d2 = (+d[2]).toString(2);
+          var d3 = (+d[3]).toString(2);
+          count++;
+      //    var xa = new Array();
+          text+='Generated IP: ' + " " + networkHost + "<br />";
+           text+= 'Binary:' + " " + d0 + "." + d1 + "." + d2 + "." + d3 + "<br />" + "<br />";
+          document.getElementById('e').innerHTML = text;
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <p>Choose IP address model: </p>
+  <select id="ip" style="width:150px;" onchange="display()">
+    <option value=""></option>
+    <option value="IPv4">IPv4</option>
+    <option value="IPv6">IPv6</option>
+  </select>
+
+  <p id="question" style="display:none;">How many IP address are required?</p>
+  <input id="questioni" style="display:none; width:210px;">
+
+  <p id="full4" style="display:none;"> Classful?: </p>
+  <select id="fullOptions4" style="display:none; width:150px;" onchange="chooseClass4()">
+    <option value=""></option>
+    <option value="Classful">Classful</option>
+    <option value="Classless">Classless</option>
+  </select>
+
+  <p id="less6" style="display:none;"> Choose Class: </p>
+  <select id="lessOptions6" style="display:none; width:150px;" onchange="chooseClass6()">
+    <option value=""></option>
+    <option value="Classless">Classless</option>
+  </select>
+
+  <p id="AE4" style="display:none;"> Choose class: </p>
+  <select id="AEOptions4" style="display:none; width:150px;" onchange="displayAE() ">
+    <option value=""></option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+  </select>
+  <p id="paraE" style="display:none;">Reserved no further action required </p>
+
+  <p id="mask4" style="display:none;"> Choose mask: </p>
+  <select id="maskOptions4" style="display:none; width:150px;">
+    <option value=""></option>
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="8">8</option>
+    <option value="16">16</option>
+    <option value="32">32</option>
+    <option value="64">64</option>
+  </select>
+
+  <p id="mask6" style="display:none;"> Choose mask: </p>
+  <select id="maskOptions6" style="display:none; width:150px;">
+    <option value=""></option>
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="8">8</option>
+    <option value="16">16</option>
+    <option value="32">32</option>
+    <option value="64">64</option>
+  </select>
+
+  <p id="zero6" style="display:none;"> Zero Compression?: </p>
+  <select id="zeroOptions6" style="display:none; width:150px;">
+    <option value=""></option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+
+  <br>
+  <!--<p id = "userIP" style = "display:none;">Enter IP address: </p>
+    <input id = "questionIN" style = "display:none; width:210px;">
+-->
+
+
+  <button id="questionb" onclick="myFunction()" style="display:none; width:100px; height:50px;">Submit</button>
+
+  <button id="refb" style="display:none; width:100px; height:50px;"><a href="manager.html" style="text-decoration: none;">New Request</a></button>
+  <br>
+  <br>
+  <h4 id="userValue"></h4>
+  <h4 id="e"></h4>
+  <h4 id="error" style="display:none">'Error: Enter number less then 255'</h4>
+</body>
+
+</html>
